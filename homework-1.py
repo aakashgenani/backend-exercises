@@ -23,7 +23,6 @@ def split_sent(sent):
 
 def check_freq(sep_words):
     i = 0
-    c = tuple()
     c_final = list()
     while i <= len(sep_words)-1:
         if (sep_words[i], sep_words.count(sep_words[i])) not in c_final:
@@ -51,20 +50,19 @@ def str_most_freq_words(most_freq_word):
 
 
 def main():
-    password = str(input("Enter password: "))
+    password = str(input("Enter password: "))  # Ask user to enter a password
     check_password(password)
-    sent = str(input('Enter sentence: '))
-    split_sent(sent)
-    sep_words = split_sent(sent)
-    print(sep_words)
+    sent = str(input('Enter sentence: '))       # Ask use to enter a sentence
+    sep_words = split_sent(sent)                # Call to the function which splits the sentence into list of words
+    print(f'List of separated words from the sentence: {sep_words}')
     freq_word = check_freq(sep_words)
-    print(freq_word)
+    print(f'Words with their frequency: {freq_word}')
     sorted_words = sort_words(freq_word)
-    print(sorted_words)
+    print(f'Word with their frequency in alphabetical order: {sorted_words}')
     most_freq_word = most_freq_words(sorted_words)
-    print(most_freq_word)
+    print(f'Two most frequent words with their frequency: {most_freq_word}')
     str_most_freq_word = str_most_freq_words(most_freq_word)
-    print(str_most_freq_word)
+    print(f'Two most frequent words are: {str_most_freq_word}')
 
 
 if __name__ == "__main__":
