@@ -35,12 +35,13 @@ def check_freq(sep_words):
 
 def sort_words(freq_word):
     sorted_words = freq_word
-    sorted_words.sort(key=lambda x: x[0])
+    sorted_words.sort(key=lambda x: x[1], reverse=True)
     return sorted_words
 
 
 def most_freq_words(sorted_words):
     result = [sorted_words[0], sorted_words[1]]
+    result.sort()
     return result
 
 
@@ -61,7 +62,9 @@ def main():
     sorted_words = sort_words(freq_word)
     print(sorted_words)
     most_freq_word = most_freq_words(sorted_words)
-    print(most_freq_words)
+    print(most_freq_word)
+    str_most_freq_word = str_most_freq_words(most_freq_word)
+    print(str_most_freq_word)
 
 
 if __name__ == "__main__":
