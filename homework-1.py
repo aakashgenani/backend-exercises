@@ -1,19 +1,30 @@
 # Backend Programming with Python
 # Homework 1
 # Question 1 & 2
-def check_password(password):
-    if len(password) < 8:
-        print('Error: Minimum 8 characters required!')
-    if not any(i.isupper() for i in password):
-        print('Error: At least one letter should be uppercase!')
-    if len([i for i in password if i.isdigit()]) < 2:
-        print('Error: At least 2 digits required!')
-    i = 0
-    while i < len(password)-1:
-        if password[i].isdigit() & password[i+1].isdigit():
-            print('Error: Two consecutive digits not allowed!')
-            break
-        i += 1
+def check_password(prompt):
+    while True:
+        password = str(input(prompt))  # Ask user to enter a password
+        a = bool()
+        for i in range(len(password) - 1):
+            if password[i].isdigit() & password[i + 1].isdigit():
+                a = True
+            else:
+                a = False
+        if len(password) < 8:
+            print('First criteria failed: Minimum 8 characters required!')
+            continue
+        elif not any(i.isupper() for i in password):
+            print('Second criteria failed: At least one letter should be uppercase!')
+            continue
+        elif len([i for i in password if i.isdigit()]) < 2:
+            print('Third criteria failed: At least 2 digits required!')
+            continue
+        elif a:
+            print('Fourth criteria failed: Two consecutive digits not allowed!')
+            continue
+        else:
+            print('Congratulations, password is valid!')
+        break
 
 
 def split_sent(sent):
@@ -54,8 +65,7 @@ def make_str_form(most_freq_words):
 
 
 def main():
-    password = str(input("Ques 1. Enter password: "))  # Ask user to enter a password
-    check_password(password)
+    check_password("Ques 1. Enter password: ")
     sent = str(input('Ques 2. Enter sentence: '))       # Ask use to enter a sentence
     sep_words = split_sent(sent)                # Call to the function which splits the sentence into list of words
     print(f'2)a) List of separated words from the sentence: {sep_words}')
