@@ -1,7 +1,6 @@
 # Backend Programming with Python
 # Homework 2
-# Question 1
-
+# Question 1 & 3
 
 def split_letters(text_from_file):
     letters = ''.join(e for e in text_from_file if e.isalnum())
@@ -39,6 +38,12 @@ def convert_to_string_form(letters_with_count):
     return s
 
 
+def check_num_belongs(input_list, number):
+    print(f'Question 3) part 1) {number} belongs in {input_list}') \
+        if len([i for i in input_list if i == number]) > 0 \
+        else print(f'{number} does not belongs in {input_list}')
+
+
 def main():
     with open('homework-2.txt', 'r') as out:
         text_from_file = str(out.read())
@@ -47,10 +52,15 @@ def main():
         letters_count = count_letters(letters_arranged)
         letters_with_count = combine_letters_with_count(letters_count, letters_arranged)
         final_form = convert_to_string_form(letters_with_count)
-        print(final_form)
+
+        print(f'Ques 1) {final_form}')
 
     with open('result.txt', 'w') as out:
         out.write(final_form)
+
+        input_list = [1, 2, 3, 4, 5, 6]
+        number = 7
+        check_num_belongs(input_list, number)
 
 
 if __name__ == "__main__":
