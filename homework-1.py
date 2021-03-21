@@ -1,6 +1,6 @@
 # Backend Programming with Python
 # Homework 1
-# Question 1 & 2
+# Question 1 & 2 & 3
 def check_password(prompt):
     while True:
         password = str(input(prompt))  # Ask user to enter a password
@@ -65,7 +65,7 @@ def make_str_form(most_freq_words):
 
 
 def main():
-    check_password("Ques 1. Enter password: ")
+    check_password("Ques 1 & 3. Enter password: ")
     sent = str(input('Ques 2. Enter sentence: '))       # Ask use to enter a sentence
     sep_words = split_sent(sent)                # Call to the function which splits the sentence into list of words
     print(f'2)a) List of separated words from the sentence: {sep_words}')
