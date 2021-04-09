@@ -48,8 +48,9 @@ def main():
     while True:
         a = input('Do you want to upgrade a ship? (y/n)  ')
         if a == 'y':
-            ship_name = input("Enter ship's name: ")
-            upgrade_name = input("Now enter the upgrade's name: ")
+            ship_name = input("Enter ship's name:\nOptions:\nNostromo or Covenant:  ")
+            upgrade_name = input("Now enter the upgrade's name:\n"
+                                 "Options:\nTitanium Armour, Absorption Shield, Proton Torpedos, and Flare Engine: ")
             if ship_name == ship1.name and upgrade_name not in ship1_upgrades:
                 ship1.upgrade(upgrade_name)
                 ship1_upgrades.append(upgrade_name)
