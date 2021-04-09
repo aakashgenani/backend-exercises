@@ -21,14 +21,46 @@ class SpaceShip:
             f'Damage dealt to {other.name} = {self.damage} ({self.name} Damage) - {other.armour} ({other.name} Armor) = {damage_dealt}')
         print(f'HP left on {other.name} = {other.hp}')
 
+    def upgrade(self, upgrade_name):
+        if upgrade_name == 'Titanium Armour':
+            self.armour = self.armour + 3
+            self.hp = self.hp + 250
+        elif upgrade_name == 'Absorption Shield':
+            self.armour = self.armour * 1.5
+        elif upgrade_name == 'Proton Torpedos':
+            self.damage = self.damage + 25
+        elif upgrade_name == 'Flare Engine':
+            self.damage = self.damage * 1.5
+            self.armour = self.armour + 3
+            self.hp = self.hp * 1.2
+
 
 def main():
     ship1 = SpaceShip('Nostromo', random.randint(1, 100), random.randint(0, 30), random.randint(0, 30))
     ship2 = SpaceShip('Covenant', random.randint(1, 100), random.randint(0, 30), random.randint(0, 30))
-    print(f'Stats:\n'
+
+    print(f'Stats before upgrades:\n'
           f'Ship 1: Name = {ship1.name}, HP = {ship1.hp}, Armour = {ship1.armour}, Damage = {ship1.damage}\n'
           f'Ship 2: Name = {ship2.name}, HP = {ship2.hp}, Armour = {ship2.armour}, Damage = {ship2.damage}')
+
+    while True:
+        a = input('Do you want to upgrade a ship? (y/n)  ')
+        if a == 'y':
+            ship_name = input("Enter ship's name: ")
+            upgrade_name = input("Now enter the upgrade's name: ")
+            if ship_name == ship1.name:
+                ship1.upgrade(upgrade_name)
+            elif ship_name == ship2.name:
+                ship2.upgrade(upgrade_name)
+        elif a == 'n':
+            break
+
+        print(f'Stats after upgrades:\n'
+              f'Ship 1: Name = {ship1.name}, HP = {ship1.hp}, Armour = {ship1.armour}, Damage = {ship1.damage}\n'
+              f'Ship 2: Name = {ship2.name}, HP = {ship2.hp}, Armour = {ship2.armour}, Damage = {ship2.damage}')
+
     print(f'Battle begins between {ship1.name} and {ship2.name}')
+
     while ship1.hp and ship2.hp > -1:
         if ship1.damage == 0 == ship2.damage:
             print(f'Match is drawn as both ships cannot attack')
