@@ -1,7 +1,7 @@
 # Backend Programming with Python
 # Homework 5 - Battleships
 
-import random
+import random, math
 
 
 class SpaceShip:
@@ -26,13 +26,13 @@ class SpaceShip:
             self.armour = self.armour + 3
             self.hp = self.hp + 250
         elif upgrade_name == 'Absorption Shield':
-            self.armour = self.armour * 1.5
+            self.armour = math.floor(self.armour * 1.5)
         elif upgrade_name == 'Proton Torpedos':
             self.damage = self.damage + 25
         elif upgrade_name == 'Flare Engine':
-            self.damage = self.damage * 1.5
+            self.damage = math.floor(self.damage * 1.5)
             self.armour = self.armour + 3
-            self.hp = self.hp * 1.2
+            self.hp = math.floor(self.hp * 1.2)
 
 
 def main():
@@ -43,15 +43,19 @@ def main():
           f'Ship 1: Name = {ship1.name}, HP = {ship1.hp}, Armour = {ship1.armour}, Damage = {ship1.damage}\n'
           f'Ship 2: Name = {ship2.name}, HP = {ship2.hp}, Armour = {ship2.armour}, Damage = {ship2.damage}')
 
+    ship1_upgrades = list()
+    ship2_upgrades = list()
     while True:
         a = input('Do you want to upgrade a ship? (y/n)  ')
         if a == 'y':
             ship_name = input("Enter ship's name: ")
             upgrade_name = input("Now enter the upgrade's name: ")
-            if ship_name == ship1.name:
+            if ship_name == ship1.name and upgrade_name not in ship1_upgrades:
                 ship1.upgrade(upgrade_name)
-            elif ship_name == ship2.name:
+                ship1_upgrades.append(upgrade_name)
+            elif ship_name == ship2.name and upgrade_name not in ship2_upgrades:
                 ship2.upgrade(upgrade_name)
+                ship2_upgrades.append(upgrade_name)
         elif a == 'n':
             break
 
