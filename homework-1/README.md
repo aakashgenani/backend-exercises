@@ -1,3 +1,4 @@
+# Strings
 # Mandatory
 
 1. Write a function that validates a password (regular string) based on the criterias below:
