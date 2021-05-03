@@ -1,0 +1,70 @@
+# Backend Development with Python
+# Homework 9
+
+CREATE TABLE books (
+	Title TEXT(150) NOT NULL,
+	Author TEXT(100),
+	Publisher TEXT(150),
+	Description TEXT(500) NOT NULL,
+	Edition INTEGER,
+	"Year" INTEGER NOT NULL,
+	Quantity INTEGER NOT NULL,
+	Price REAL
+);
+
+1.
+SELECT Title, Description
+FROM books
+WHERE Author = 'J.K. Rowling'
+
+2.
+SELECT Title, Publisher, Edition, "Year" 
+FROM books
+WHERE "Year" LIKE '200%'
+
+3.
+SELECT *
+FROM books
+WHERE Quantity = 0
+
+4.
+SELECT *
+FROM books
+WHERE Quantity > 0 AND PRICE IS NULL
+
+5.
+SELECT *
+FROM books
+WHERE (Author = 'Gordon Ramsay' OR Author = 'Jamie Oliver')
+	AND Quantity > 0
+	AND (Title LIKE '%Cooking%' OR Title LIKE '%Food%')
+
+6.
+SELECT *
+FROM books
+WHERE Author LIKE 'A%'
+OR Author  LIKE 'E%'
+OR Author  LIKE 'I%'
+OR Author  LIKE 'O%'
+OR Author  LIKE 'U%'
+
+7.
+SELECT *
+FROM books
+WHERE Title LIKE '%a%a%a%'
+
+8.
+SELECT *
+FROM books
+WHERE LENGTH(Title) = 4
+
+9.
+SELECT *
+FROM books
+WHERE Title = Author
+
+10.
+SELECT *
+FROM books
+WHERE Quantity > 0 AND Author NOT LIKE '%a'
+AND (LENGTH(Description) = 0 OR LENGTH(Description)>4)
