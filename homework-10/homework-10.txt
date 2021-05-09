@@ -1,0 +1,83 @@
+# Homework 10 - Relational Tables
+
+Creating Tables:
+
+	CREATE TABLE books (
+		Title TEXT NOT NULL,
+		"First Author" TEXT NOT NULL,
+		"Second Author" TEXT,
+		Publisher TEXT,
+		"Year of Publication" INTEGER,
+		AuthorId INTEGER,
+		PublisherId INTEGER,
+		idBooks INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+		FOREIGN KEY (AuthorId) REFERENCES authors(AuthorId),
+		FOREIGN KEY (PublisherId) REFERENCES publishers(PublisherId)
+	);
+
+	CREATE TABLE publishers (
+		Name TEXT NOT NULL,
+		Location TEXT,
+		Telephone INTEGER,
+		"Founding Year" INTEGER NOT NULL,
+		PublisherId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT
+		);
+
+	CREATE TABLE authors (
+		Name TEXT NOT NULL,
+		"Year of Birth" INTEGER,
+		Location TEXT,
+		Telephone INTEGER,
+		"Primary Publisher" TEXT,
+		AuthorId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT
+	);
+
+
+SQL Queries:
+
+1.
+SELECT b.Title, b."First Author", b.Publisher 
+FROM books b 
+;
+
+2.
+SELECT a.Name 
+FROM authors a
+INNER JOIN publishers p ON p.Name = a."Primary Publisher" 
+WHERE p."Founding Year" > 2000
+;
+
+3.
+SELECT b.Title
+FROM books b
+INNER JOIN authors a ON a.AuthorId = b.AuthorId
+WHERE a."Primary Publisher" <> b.Publisher 
+;
+
+4.
+SELECT b.Title, b."First Author", a."Primary Publisher" 
+FROM books b
+INNER JOIN authors a ON a.Name = b."First Author" 
+WHERE a."Primary Publisher" IS NULL
+;
+
+5.
+SELECT b.Title, b."First Author", b."Second Author" , a."Primary Publisher" 
+FROM books b
+INNER JOIN authors a ON a.Name = b."First Author" 
+WHERE a."Primary Publisher" IS NULL AND b."Second Author" IS NOT NULL
+
+6.
+SELECT a.Name , a."Year of Birth", a.Location, a.Telephone 
+FROM authors a 
+LEFT JOIN books b ON a.Name = b."First Author" 
+WHERE b."First Author" IS NULL
+;
+
+7.
+SELECT a.Name , a."Year of Birth", a.Location, a.Telephone 
+FROM authors a 
+LEFT JOIN books b ON a.Name = b."Second Author"
+OR a.Name = b."First Author"
+WHERE b.Title IS NULL
+;
