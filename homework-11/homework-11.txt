@@ -1,0 +1,67 @@
+Homework 11 # More SQL Queries
+
+1.
+SELECT b.Publisher, count(*)
+FROM books b
+GROUP BY Publisher
+;
+
+2.
+SELECT a.Name, count(b.Title) AS "count of books"
+FROM authors a 
+INNER JOIN books b ON a.AuthorId = b.AuthorId
+GROUP BY a.AuthorId
+LIMIT 3
+;
+
+3.
+SELECT b.Title, a."Primary Publisher", b.Publisher, b."First Author" 
+FROM authors a 
+INNER JOIN books b ON a.Name = b."First Author"
+WHERE a."Primary Publisher" <> b.Publisher 
+;
+
+4.
+SELECT a.Location, count(*) AS "count of books"
+FROM authors a 
+INNER JOIN books b ON a.Name = b."First Author" OR a.Name = b."Second Author"
+GROUP BY a.Location 
+ORDER BY "count of books" DESC
+LIMIT 1
+;
+
+5.
+SELECT b.Publisher, count(*) AS "count of books"
+FROM publishers p 
+INNER JOIN books b ON b.PublisherId = p.PublisherId
+WHERE p."Founding Year" > 2000
+GROUP BY p.Name 
+ORDER BY "count of books" DESC
+LIMIT 1
+;
+
+6.
+SELECT p.Name, count(*) AS "count of authors below 30"
+FROM publishers p 
+INNER JOIN authors a ON a."Primary Publisher" = p.Name
+WHERE a."Year of Birth" > (2021-30) AND p."Founding Year" < 1985
+GROUP BY p.Name
+;
+
+7.
+SELECT b."First Author", b."Second Author", count(*)
+FROM books b 
+LEFT JOIN authors a ON a.AuthorId = b.AuthorId
+WHERE b."Second Author" IS NOT NULL
+GROUP BY b."First Author"
+ORDER BY 3 DESC
+LIMIT 1
+;
+
+8.
+--incomplete
+SELECT a.Name, b."First Author", b."Second Author", a.Location 
+FROM books b 
+INNER JOIN authors a ON (b.AuthorId = a.AuthorId) OR (b.Author2Id = a.AuthorId)
+WHERE b."Second Author" IS NOT NULL
+;
