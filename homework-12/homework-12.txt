@@ -1,0 +1,52 @@
+# Backend Development
+# Homework 12
+
+# Creating Tables:
+
+CREATE TABLE movies (
+MovieID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+Title TEXT NOT NULL,
+Quantity INTEGER NOT NULL,
+Price INTEGER NOT NULL,
+Rated TEXT,
+"Year" INTEGER,
+Genre TEXT,
+Director TEXT,
+"Type" TEXT
+);
+
+CREATE TABLE customers (
+CustomerID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+Name TEXT NOT NULL,
+Movies_bought TEXT,
+Email TEXT
+);
+
+
+# Some Queries:
+
+1. # get movies and quantity made by a specific director
+SELECT m.Title, m.Quantity, m.Director, m.Price
+FROM movies m
+WHERE m.Director = '{name}';
+
+2. # subtract the amount of a movie brought from the store
+UPDATE movies
+SET Quantity = Quantity - quantity_bought
+WHERE Title = '{movies_title}';
+
+3. # Customer searching movies by name
+SELECT m.Title, m.Quantity, m.Price 
+FROM movies m
+WHERE m.Title LIKE '%{movie_search_query}%';
+
+4. # Customer wants to browse the whole collection
+SELECT *
+FROM movies m;
+
+5. # Customer wants to see all the movies sorted by lowest price
+SELECT m.Title, m.Quantity, m.Price
+FROM movies m
+ORDER BY m.Price DESC;
+
+
